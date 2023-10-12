@@ -7,7 +7,7 @@ module.exports= (app) => {
 
     app.post('/api/login',(req,res)=>{
     
-    User.findOne({ where: {nom: req.body.nom} }).then( user =>{
+    User.findOne({ where: {pseudo: req.body.pseudo} }).then( user =>{
 
             return res.json({'token:':Token.generetedTokenForUser(user)})
         }

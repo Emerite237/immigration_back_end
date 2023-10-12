@@ -73,11 +73,10 @@ require("./src/routes/lister_videos_id_formation")(app)        // http://localho
 
 require("./src/routes/modifier_formation")(app)                  // http://localhost:3000/api/formation/modifier/:id
 
-require("./src/routes/modifier_video_uploader")(app)            // http://localhost:3000/api/uploads/modifier/video/:id/:id_formation
+//require("./src/routes/modifier_video_uploader")(app)            // http://localhost:3000/api/uploads/modifier/video/:id/:id_formation
 
 require("./src/routes/modifier_videos")(app)                     // http://localhost:3000/api/video/modifier/:id
 
-require("./src/routes/")
 
  
 

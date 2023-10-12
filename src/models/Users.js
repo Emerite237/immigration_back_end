@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
-      speudo: {
+      pseudo: {
         type: DataTypes.STRING,
         allowNull: false,
         unique:{ 

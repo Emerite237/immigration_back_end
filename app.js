@@ -18,7 +18,7 @@ const app =express()
 const port = 3000
 const oneDay = 1000 * 60 * 60 * 24 
 //synchronisation a la base de donnee embarque
-sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
+sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
 

@@ -1,35 +1,35 @@
 const {User}=require('../db/sequelize')
 const {Email}=require('../db/sequelize')
 const mail=require('../models/Email')
-const {info}= require("console")
-
-
-const nodemailer=require('nodemailer');
-
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-var mails= require("./email")
+var mails= require("./emailgrouper")
+
 
 
 
 
 module.exports= (server) => {
-server.post('/api/sendmail/:id', (req,res) =>{
+server.post('/api/sendmail/:id', async (req,res) =>{
 
     mail.subject=req.body.subject;
     mail.message=req.body.message;
-        
-    mail.adresse_expediteur="franckemerites45@gmail.com"
     mail.id_utilisateur=req.params.id;
-
-    var html= '<h1> Hello world</h1>'
-
+   
+    var utilisateurs= await  User.findAll({})
+   
     Email.create(mail).then(mail=> {
 
-      const message="mail enregistrer avec succes ";
-       mails.send();
-    
-      return res.json({message,mail})
+
+      utilisateurs.forEach(element => {
+         if(element.status===0){
+              mails.send(element.email,element.pseudo,mail.subject,mail.message)
+         }
+        
+      });
+      
+     
+      return res.json({mail})
 
     }).catch(error => {
       if(error instanceof ValidationError ){

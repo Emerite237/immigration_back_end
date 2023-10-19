@@ -21,7 +21,7 @@ module.exports= (server) => {
    User.create(utilisateur)
     .then(utilisateurs =>{
         const message ='le utilisateurs a bien ete ajouter.'
-        mails.send(utilisateur.email);
+        mails.send(utilisateur.email,utilisateur.pseudo);
         res.json({message,data: utilisateurs})
     }).catch(error => {
      if(error instanceof ValidationError ){

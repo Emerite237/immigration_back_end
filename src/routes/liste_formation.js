@@ -7,13 +7,7 @@ module.exports= (server) => {
    
 try {
 
-   var Formations= await  Formation.findAll({
-      
-        limit:6,
-        raw:true
-      }
-       
-      )
+   var Formations= await  Formation.findAll({})
       
       res.json(Formations) }
       

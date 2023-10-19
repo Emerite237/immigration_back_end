@@ -1,23 +1,12 @@
 
 module.exports = (sequelize,DataTypes)=> {
 
-    return sequelize.define('videos',
+    return sequelize.define('imagesacceuil',
     {
-         
-        
-        id_videos:{
+           id_images:{
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },
-
-        id_formation: {
-            type: DataTypes.INTEGER,
-            allowNull:false,
-            validate: {
-                isInt: {msg:'id  est un  entier'},
-                notNull:{msg:'cette id est requise '}
-            }
         },
         nom: {
             type: DataTypes.STRING,
@@ -29,19 +18,14 @@ module.exports = (sequelize,DataTypes)=> {
     path:{
         type: DataTypes.TEXT,
         allowNull: false,
-       
+        unique:{
+           msg: 'ce texte est deja pris' 
+        },
         validate:{
           
             notNull:{msg: 'ce path est requise'}
         },
     },
-     
-
-    
-    
-    
- 
-   
    
 
 },

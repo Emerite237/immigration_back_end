@@ -1,17 +1,13 @@
-const {Image}= require('../db/sequelize')
+const {ImageAcceuil}= require('../db/sequelize')
 
 const cors= require('cors')
 module.exports= (server) => {
 
   
    
-   server.get('/api/image/:id',cors(),  async(req,res)=>{
+   server.get('/api/liste/imageacceuil',cors(),  async(req,res)=>{
      
-       Image.findAll({
-        where: {
-            id_formation: req.params.id}
-         
-  })
+       ImageAcceuil.findAll({})
        .then(Image =>{
           
        console.log(Image)

@@ -23,15 +23,16 @@ module.exports = (sequelize, DataTypes) => {
           notNull: {msg: `Votre mail est obligatoire merci de le renseigner`}
         }
       },
-     adresse_expediteur: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      
+      id_utilisateur: {
+        type: DataTypes.INTEGER,
+        allowNull:false,
         validate: {
-          notEmpty: {msg: `adresse de l'esxpediteur ne doit pas être vide`},
-          notNull: {msg: `adresse de l'esxpediteur est obligatoire merci de le renseigner`}
+            isInt: {msg:'id utilisateur  est un  entier'},
+            notNull:{msg:'cette id utilisateur est requise '}
         }
-      },
-     
+    },
+    
     }, {
       timestamps: true,
       createdAt: 'date_creation',

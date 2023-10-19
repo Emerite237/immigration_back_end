@@ -4,6 +4,7 @@ const Formadtionmodel=require("../models/Formations")
 const Videomodel= require("../models/Videos")
 const Imagesmodels=require("../models/Images")
 const Pdfmodel=require("../models/Pdf")
+const Imagesacceuilmodels=require("../models/ImagesAcceuil")
 
 const { Sequelize, DataTypes } = require('sequelize')
 
@@ -23,6 +24,7 @@ const Image=Imagesmodels(sequelize,DataTypes);
 const User=Usermodel(sequelize,DataTypes);
 const Email=Emailmodel(sequelize,DataTypes);
 const Formation=Formadtionmodel(sequelize,DataTypes);
+const ImageAcceuil=Imagesacceuilmodels(sequelize,DataTypes);
 
 User.hasMany(Email,{
   foreignKey:'id_utilisateur',
@@ -93,5 +95,5 @@ const initDb = () => {
     
   
   module.exports = { 
-   sequelize,User,Email,Formation,Video,Image,Pdf
+   sequelize,User,Email,Formation,Video,Image,Pdf,ImageAcceuil
   }

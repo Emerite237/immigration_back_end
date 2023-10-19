@@ -57,17 +57,25 @@ require("./src/routes/modifier_speudo")(app)                         // http://l
 require('./src/routes/creation_formation')(app)                  // http://localhost:3000/api/creation/formation
 
 
+require('./src/routes/envoismaildiffusion')(app)                // http://localhost:3000/api/sendmail/:id
+
+
+
+
 require('./src/routes/enregistrer_video_youtube')(app)        //  http://localhost:3000/api/creation/videoyoutube/:id   pour les videos youtubes
 
-require('./src/routes/enregistrer_videos')(app)                 // http://localhost:3000/api/uploads/video/:id  id de la formation  video a uploader
+
+require('./src/routes/enregistrer_videos')(app)                 // http://localhost:3000/api/uploads/id
+
+
+require("./src/routes/lister_image_id_formation")(app)         // http://localhost:3000/api/image/:id
+
+require("./src/routes/liste_formation")(app)                   // http://localhost:3000/api/liste/formatioideo/:id  id de la formation  video a uploader
 
 require('./src/routes/enregistrer_images')(app)                 // http://localhost:3000/api/uploads/image/:id
 
 require("./src/routes/enregistrer_pdf")(app)                    // http://localhost:3000/api/uploads/pdf/:id
 
-require("./src/routes/lister_image_id_formation")(app)         // http://localhost:3000/api/image/:id
-
-require("./src/routes/liste_formation")(app)                   // http://localhost:3000/api/liste/formation
  
 require("./src/routes/lister_videos_id_formation")(app)        // http://localhost:3000/api/video/:id
 
@@ -77,11 +85,18 @@ require("./src/routes/modifier_formation")(app)                  // http://local
 
 require("./src/routes/modifier_videos")(app)                     // http://localhost:3000/api/video/modifier/:id
 
+require("./src/routes/enregistrer_images_acceuil")(app)                 //  http://localhost:3000/api/uploads/imageacceuil
+
+require("./src/routes/lister_images_acceuil")(app)                      //   http://localhost:3000/api/liste/imageacceuil
+
 
  
 
-//point de terminaison admin
+//point de terminaison  front eend 
 
+ 
+require("./src/routes/idadminstrateur")(app)                    // http://localhost:3000/api/administrateur
+            
 //require('./src/routes/envoismaildiffusion')(app)
 
 app.get('/', (req, res) => {

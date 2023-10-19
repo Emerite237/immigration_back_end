@@ -1,6 +1,6 @@
 
 const nodemailer=require('nodemailer');
-module.exports.send = async function(mail,pseudo) {
+module.exports.send = async function(mail,pseudo,suject,message) {
 
 
   const transporter = nodemailer.createTransport({
@@ -18,8 +18,8 @@ module.exports.send = async function(mail,pseudo) {
 const mailOptions = {
   from: 'franckemerites45@outlook.com',
   to: mail,
-  subject: "Confirmation d'inscription",
-  text:  `Félicitation ${pseudo} votre inscription a ete confirme dans le site France-etude . `
+  subject: suject,
+  text:  ` Salut  ${pseudo}!\n\n\n` + message 
 };
 
          transporter.sendMail(mailOptions,function (error,info){

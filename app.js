@@ -18,7 +18,7 @@ const app =express()
 const port = 3000
 const oneDay = 1000 * 60 * 60 * 24 
 //synchronisation a la base de donnee embarque
-sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
+sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
 
@@ -78,7 +78,6 @@ require("./src/routes/modifier_formation")(app)                  // http://local
 require("./src/routes/modifier_videos")(app)                     // http://localhost:3000/api/video/modifier/:id
 
 
- 
 
 //point de terminaison admin
 

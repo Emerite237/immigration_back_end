@@ -8,9 +8,7 @@ const cors= require("cors")
 
  var tab=[]
 
-const uploadDir = path.join(__dirname, './public/data');
-//const imagePath = path.join(uploadDir, 'uploads', `${filename}.jpg`);
-
+const uploadDir = path.join(__dirname,"./public");
 
 const  MIME_TYPES={
   "image/jpg" : "jpg",
@@ -24,7 +22,7 @@ const  MIME_TYPES={
 const storage =multer.diskStorage({
   destination : (req,file,cb)=>
   {
-     cb(null,"./public/data/uploads/images")
+     cb(null,"../France-Etude/src/assets")
   },
   filename : (req,file,cb)=>{
     const name=file.originalname.split(" ").join("_")

@@ -9,7 +9,7 @@ const multer =require("multer");
 const cors= require("cors")
 
 
-const uploadDir = path.join(__dirname, './public/data/uploads');
+const uploadDir = path.join(__dirname, './public');
 //const imagePath = path.join(uploadDir, 'uploads', `${filename}.jpg`);
 
 
@@ -19,7 +19,7 @@ const  MIME_TYPES={
 const storage =multer.diskStorage({
   destination : (req,file,cb)=>
   {
-     cb(null,"./public/data/uploads/videos/")
+     cb(null,"../France-Etude/src/assets")
   },
   filename : (req,file,cb)=>{
     const name=file.originalname.split(" ").join("_")
@@ -55,7 +55,7 @@ module.exports= (server) => {
   if(error instanceof UniqueConstraintError){
    return res.status(400).json({message: error.message})
   }
-  const message="la formations n'a pas pue etre ajouter"
+  const message="la videos n'a pas pue etre ajouter"
 
   console.log(error);
   res.status(500).json({message, data:error})

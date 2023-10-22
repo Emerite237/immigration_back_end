@@ -94,7 +94,7 @@ require("./src/routes/lister_images_acceuil")(app)                      //   htt
 
 //point de terminaison  front eend 
 
- 
+require("./src/routes/liste_image_complet")(app)                // http://localhost:3000/api/liste/imagecomplet
 require("./src/routes/idadminstrateur")(app)                    // http://localhost:3000/api/administrateur
             
 //require('./src/routes/envoismaildiffusion')(app)

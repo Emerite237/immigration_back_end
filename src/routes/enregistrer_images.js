@@ -51,7 +51,7 @@ module.exports= (server) => {
   server.post('/api/uploads/image/:id',upload,cors(),async (req,res)=>{
     //const extention= MIME_TYPES[file.mimetype]
 
-var files= req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_formation:req.params.id,nom:file.originalname}));
+var files= req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_formation:req.params.id,nom:file.filename}));
      
       console.log(files)
      await Image.bulkCreate(files)

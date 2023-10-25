@@ -3,7 +3,7 @@ const {Email}=require('../db/sequelize')
 const mail=require('../models/Email')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-var mails= require("./emailgrouper")
+var mails= require("../fonctions/emailgrouper")
 
 
 

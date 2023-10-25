@@ -41,7 +41,7 @@ module.exports= (server) => {
 
   server.post('/api/uploads/video/:id',upload,cors(),async (req,res)=>{
     
-    var videos = req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_formation:req.params.id,nom:file.originalname}));
+    var videos = req.files.map(file=>({path:file.path.replace(/\\/g, "/"),titre_formation:req.params.id}));
     console.log(videos)
     await Video.bulkCreate(videos).then(formations =>{
      

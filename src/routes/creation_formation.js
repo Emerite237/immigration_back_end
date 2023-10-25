@@ -3,21 +3,73 @@ const {Formation}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 
+const path= require("path")
+const multer =require("multer");
+
+const cors= require("cors")
+
+ var images = require("../fonctions/enregistrer_images")
+
+ var tab=[]
+
+const uploadDir = path.join(__dirname, './public/data');
+//const imagePath = path.join(uploadDir, 'uploads', `${filename}.jpg`);
+
+
+const  MIME_TYPES={
+  "image/jpg" : "jpg",
+  "image/jpeg":"jpg",
+  "image/gif":"gif",
+  "image/png": "png",
+  "image/bmp":"bmp"
+}
+
+
+const storage =multer.diskStorage({
+  destination : (req,file,cb)=>
+  {
+     cb(null,"./public/data/uploads/images")
+  },
+  filename : (req,file,cb)=>{
+    const name=file.originalname.split(" ").join("_")
+    const extention= MIME_TYPES[file.mimetype]
+
+    
+
+     cb(null, name+ "_"+Date.now()+ "."+extention);
+  }
+})
+
+
+ const upload= multer({storage:storage,
+  
+
+  }
+  )
+
+
 
 const formation = require('../models/Formations')
-const cors=require("cors")
+
 
 module.exports= (server) => {
-   server.post('/api/creation/formation',cors(),(req,res)=>{
+   server.post('/api/creation/formation',upload.single('file'),cors(),(req,res)=>{
    
     formation.titre=req.body.titre;
    
+    formation.contenu=req.body.contenu
     formation.description=req.body.description;
     
    Formation.create(formation)
     .then(formations =>{
         const message ='le formations a bien ete ajouter.'
+
+        console.log(req.file)
+          images.image(req.file,formations.titre,req.body.url)
+
         res.json({message,data: formations})
+
+
     }).catch(error => {
      if(error instanceof ValidationError ){
         console.log(error);

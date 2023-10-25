@@ -11,21 +11,15 @@ module.exports = (sequelize,DataTypes)=> {
             autoIncrement: true
         },
 
-        id_formation: {
-            type: DataTypes.INTEGER,
+        titre_formation: {
+            type: DataTypes.STRING,
             allowNull:false,
             validate: {
-                isInt: {msg:'id  est un  entier'},
-                notNull:{msg:'cette id est requise '}
-            }
+                notEmpty: {msg: 'Le titre ne doit pas être vide'},
+                notNull: {msg: 'Le titre  est une propriété requise'}
+              }
         },
-        nom: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              notEmpty: {msg: 'Le nom ne doit pas être vide'},
-              notNull: {msg: 'Le nom est une propriété requise'}
-            }},
+       
     path:{
         type: DataTypes.TEXT,
         allowNull: false,

@@ -12,7 +12,7 @@ module.exports= (server) => {
 
     video.id_formation=  parseInt (req.params.id);
 
-    video.nom=req.body.nom;
+    
 
     video.path=req.body.path;
 

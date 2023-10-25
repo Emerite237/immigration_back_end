@@ -41,13 +41,13 @@ Email.belongsTo(User,{
 
 
 Formation.hasMany(Video,{
-  foreignKey:'id_formation',
+  foreignKey:'titre_formation',
   as: 'video_formation',
   onDelete:'CASCADE'
 })
 
 Video.belongsTo(Formation,{
-  foreignKey: 'id_formation',
+  foreignKey: 'titre_formation',
   as: 'video_formation',
   onDelete: 'CASCADE',
   hooks:true
@@ -56,13 +56,13 @@ Video.belongsTo(Formation,{
 
 
 Formation.hasMany(Image,{
-  foreignKey:'id_formation',
+  foreignKey:'titre_formation',
   as: 'image_formation',
   onDelete:'CASCADE'
 })
 
 Image.belongsTo(Formation,{
-  foreignKey: 'id_formation',
+  foreignKey: 'titre_formation',
   as: 'image_formation',
   onDelete: 'CASCADE',
   hooks:true
@@ -78,7 +78,7 @@ Formation.hasMany(Pdf,{
 })
 
 Pdf.belongsTo(Formation,{
-  foreignKey: 'id_formation',
+  foreignKey: 'titre_formation',
   as: 'pdf_formation',
   onDelete: 'CASCADE',
   hooks:true

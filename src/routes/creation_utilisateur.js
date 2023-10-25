@@ -4,7 +4,7 @@ const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const utilisateur = require('../models/Users')
 const cors=require("cors")
-var mails= require("./email")
+var mails= require("../fonctions/email")
 
 module.exports= (server) => {
    server.post('/api/register', cors(),(req,res)=>{

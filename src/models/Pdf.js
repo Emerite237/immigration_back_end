@@ -11,13 +11,13 @@ module.exports = (sequelize,DataTypes)=> {
             autoIncrement: true
         },
 
-        id_formation: {
+        titre_formation: {
             type: DataTypes.INTEGER,
             allowNull:false,
             validate: {
-                isInt: {msg:'id  est un  entier'},
-                notNull:{msg:'cette id est requise '}
-            }
+                notEmpty: {msg: 'Le titre ne doit pas être vide'},
+                notNull: {msg: 'Le titre  est une propriété requise'}
+              }
         },
         nom: {
             type: DataTypes.STRING,

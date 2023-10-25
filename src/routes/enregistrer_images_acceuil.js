@@ -50,10 +50,10 @@ module.exports= (server) => {
   var c=0
   server.post('/api/uploads/imageacceuil',upload,cors(),async (req,res)=>{
     //const extention= MIME_TYPES[file.mimetype]
-
+  
 var files= req.files.map(file=>({path:file.path.replace(/\\/g, "/"),nom:file.originalname}));
      
-      console.log(files)
+      console.log(upload.file)
      await ImageAcceuil.bulkCreate(files)
 
         res.status(200).send({message:" image(s) a(ont) ete upload"})

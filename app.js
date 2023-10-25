@@ -18,7 +18,7 @@ const app =express()
 const port = 3000
 const oneDay = 1000 * 60 * 60 * 24 
 //synchronisation a la base de donnee embarque
-sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
+sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
 
@@ -72,7 +72,7 @@ require("./src/routes/lister_image_id_formation")(app)         // http://localho
 
 require("./src/routes/liste_formation")(app)                   // http://localhost:3000/api/liste/formatioideo/:id  id de la formation  video a uploader
 
-require('./src/routes/enregistrer_images')(app)                 // http://localhost:3000/api/uploads/image/:id
+//require('./src/routes/enregistrer_images')(app)                 // http://localhost:3000/api/uploads/image/:id
 
 require("./src/routes/enregistrer_pdf")(app)                    // http://localhost:3000/api/uploads/pdf/:id
 

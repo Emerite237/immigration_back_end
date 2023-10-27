@@ -53,7 +53,7 @@ const formation = require('../models/Formations')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/formation',upload.single('file'),cors(),(req,res)=>{
+   server.post('/api/creation/formation',upload.any('file'),cors(),(req,res)=>{
    
     formation.titre=req.body.titre;
    
@@ -64,8 +64,8 @@ module.exports= (server) => {
     .then(formations =>{
         const message ='le formations a bien ete ajouter.'
 
-        console.log(req.file)
-          images.image(req.file,formations.titre,req.body.url)
+        console.log(req.files)
+          images.image(req.files,formations.titre,req.body.url)
 
         res.json({message,data: formations})
 

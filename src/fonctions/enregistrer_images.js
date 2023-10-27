@@ -11,6 +11,7 @@ module.exports.image = async function(file,titre,url){
   
        image.path= file.path.replace(/\\/g, "/")
       image.titre_formation= titre
+      image.nom=file.filename
        
       video.path=url
       video.titre_formation=titre

@@ -18,7 +18,7 @@ const app =express()
 const port = 3000
 const oneDay = 1000 * 60 * 60 * 24 
 //synchronisation a la base de donnee embarque
-sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
+sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
 
@@ -62,7 +62,7 @@ require('./src/routes/envoismaildiffusion')(app)                // http://localh
 
 
 
-require('./src/routes/enregistrer_video_youtube')(app)        //  http://localhost:3000/api/creation/videoyoutube/:id   pour les videos youtubes
+//equire('./src/routes/enregistrer_video_youtube')(app)        //  http://localhost:3000/api/creation/videoyoutube/:id   pour les videos youtubes
 
 
 require('./src/routes/enregistrer_videos')(app)                 // http://localhost:3000/api/uploads/id
@@ -72,7 +72,7 @@ require("./src/routes/lister_image_id_formation")(app)         // http://localho
 
 require("./src/routes/liste_formation")(app)                   // http://localhost:3000/api/liste/formatioideo/:id  id de la formation  video a uploader
 
-//require('./src/routes/enregistrer_images')(app)                 // http://localhost:3000/api/uploads/image/:id
+require('./src/routes/enregistrer_image')(app)                 // http://localhost:3000/api/uploads/image/:id
 
 require("./src/routes/enregistrer_pdf")(app)                    // http://localhost:3000/api/uploads/pdf/:id
 
@@ -85,14 +85,15 @@ require("./src/routes/modifier_formation")(app)                  // http://local
 
 require("./src/routes/modifier_videos")(app)                     // http://localhost:3000/api/video/modifier/:id
 
-require("./src/routes/enregistrer_images_acceuil")(app)                 //  http://localhost:3000/api/uploads/imageacceuil
+//require("./src/routes/enregistrer_images")(app)                 //  http://localhost:3000/api/uploads/image
 
 require("./src/routes/lister_images_acceuil")(app)                      //   http://localhost:3000/api/liste/imageacceuil
 
+require("./src/routes/supprimer_formation")(app)                        //  http://localhost:3000/api/formation/supprimer/:id
 
- 
+  
 
-//point de terminaison  front eend 
+//point de terminaison  front end 
 
 require("./src/routes/liste_image_complet")(app)                // http://localhost:3000/api/liste/imagecomplet
 require("./src/routes/idadminstrateur")(app)                    // http://localhost:3000/api/administrateur

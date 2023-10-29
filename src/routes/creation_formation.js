@@ -65,7 +65,7 @@ module.exports= (server) => {
         const message ='le formations a bien ete ajouter.'
 
         console.log(req.files)
-          images.image(req.files,formations.titre,req.body.url)
+          images.image(req.files,formations.id_formation,req.body.url)
 
         res.json({message,data: formations})
 

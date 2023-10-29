@@ -7,7 +7,7 @@ module.exports= (server) => {
      
        Video.findAll({
         where: {
-            titre_formation: req.params.id}
+            id_formation: req.params.id}
          
   })
        .then(Video =>{

@@ -9,7 +9,7 @@ module.exports= (server) => {
      
        Image.findAll({
         where: {
-            titre_formation: req.params.id}
+            id_formation: req.params.id}
          
   })
        .then(Image =>{

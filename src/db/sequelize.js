@@ -41,13 +41,13 @@ Email.belongsTo(User,{
 
 
 Formation.hasMany(Video,{
-  foreignKey:'titre_formation',
+  foreignKey:'id_formation',
   as: 'video_formation',
   onDelete:'CASCADE'
 })
 
 Video.belongsTo(Formation,{
-  foreignKey: 'titre_formation',
+  foreignKey: 'id_formation',
   as: 'video_formation',
   onDelete: 'CASCADE',
   hooks:true
@@ -56,13 +56,13 @@ Video.belongsTo(Formation,{
 
 
 Formation.hasMany(Image,{
-  foreignKey:'titre_formation',
+  foreignKey:'id_formation',
   as: 'image_formation',
   onDelete:'CASCADE'
 })
 
 Image.belongsTo(Formation,{
-  foreignKey: 'titre_formation',
+  foreignKey: 'id_formation',
   as: 'image_formation',
   onDelete: 'CASCADE',
   hooks:true

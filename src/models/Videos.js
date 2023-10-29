@@ -20,13 +20,10 @@ module.exports = (sequelize,DataTypes)=> {
               }
         },*/
 
-        titre_formation: {
-            type: DataTypes.STRING,
+        id_formation: {
+            type: DataTypes.INTEGER,
             allowNull:false,
-            validate: {
-                notEmpty: {msg: 'Le titre ne doit pas être vide'},
-                notNull: {msg: 'Le titre  est une propriété requise'}
-              }
+           
         },
        
     path:{

@@ -7,24 +7,38 @@ const video = require("../models/Videos")
 
 
 
-module.exports.image = async function (file,id, url) {
+module.exports.modifier = async function (file,id, url) {
 
   /*  image.path= file.path.replace(/\\/g, "/")
    image.titre_formation= titre
    image.nom=file.filename*/
 if(file!==null){
-  console.log(id)
-  var files = file.map(file => ({ path: file.path.replace(/\\/g, "/"), nom: file.filename, id_formation:id}));
-  console.log(  "caracteristique: "+files)
 
-  //console.log(upload.file)
-  await Image.bulkCreate(files)
+    var files= file.map(file=>({path:file.path.replace(/\\/g, "/"),nom:file.originalname}));
+  console.log(id)
+  for(const items of files){
+
+    console.log(items)
+    await Image.update ( items,
+        {
+            where: {
+                id_formation:id
+            }
+        }
+    )
+  }
 }
   if (url !== null
   ) {
     video.path = url
     video.id_formation = id
-    Video.create(video)
+   await  Video.update(video,
+      {
+          where: {
+              id_formation:id
+          }
+      }
+  )
   }
 
 

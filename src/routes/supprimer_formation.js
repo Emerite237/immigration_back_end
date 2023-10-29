@@ -13,7 +13,8 @@ module.exports = (app)=>{
 
       
       var i=   Image.findOne({
-        where:{ titre_formation:req.params.id }
+        where: {
+            id_formation: req.params.id}
       }) .then(Images =>{
     
         console.log(Images)
@@ -24,7 +25,7 @@ module.exports = (app)=>{
      
 
         Formation.findOne({ where: {
-            titre: req.params.id}}
+            id_formation: req.params.id}}
          )
         .then(Formation => {
             if(Formation===null){
@@ -37,7 +38,7 @@ module.exports = (app)=>{
            //
             const Formationsdelete=Formation;
             Formation.destroy({
-                where : id=Formation.titre
+                where : id_formation=Formation.id_formation
             }).then()
             return  res.json( Formationsdelete)  
         })

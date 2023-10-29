@@ -8,6 +8,8 @@ const path= require("path")
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 
+var formation =require("../models/Formations")
+
 const multer =require("multer");
 
 var images = require("../fonctions/modifier_image_video")
@@ -54,7 +56,7 @@ module.exports =(app) =>{
     {
         const id= req.params.id
 
-        if(req.files!==null){
+        if(req.files!=="undefined"){
 
             Image.findOne( {where: {
                 id_formation: req.params.id}}) .then(image=> {
@@ -73,7 +75,7 @@ module.exports =(app) =>{
 }
 
 
-if(req.body.url!==null){
+if(req.body.url!=="undefined"){
       
     Video.findOne( {where: {
         id_formation: req.params.id}}) .then(video=> {
@@ -88,9 +90,25 @@ if(req.body.url!==null){
 
 }
 
+formation= Formation.findOne( {where: {
+    id_formation: req.params.id}})
+
+    if( req.body.titre!=="undefined")
+    {
+        formation.titre=req.body.titre
+    } 
+    if( req.body.description!=="undefined")
+    {
+        formation.titre=req.body.description
+    } 
+    if( req.body.contenu!=="undefined")
+    {
+        formation.titre=req.body.contenu
+    } 
 
 
-      Formation.update(req.body,{
+
+      Formation.update(formation,{
             where: {id_formation: id}
 
         })

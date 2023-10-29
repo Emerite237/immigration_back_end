@@ -14,7 +14,7 @@ module.exports.modifier = async function (file,id, url) {
    image.nom=file.filename*/
 if(file!==null){
 
-    var files= file.map(file=>({path:file.path.replace(/\\/g, "/"),nom:file.originalname}));
+    var files= file.map(file=>({path:file.path.replace(/\\/g, "/"),nom:file.filename}));
   console.log(id)
   for(const items of files){
 

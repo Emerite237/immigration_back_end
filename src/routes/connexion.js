@@ -14,7 +14,9 @@ module.exports= (app) => {
             return res.status(404).json({message})
           }
 
+            global.isConnected=true
 
+            console.log(global.isConnected)
             return res.json({'token:':Token.generetedTokenForUser(user),user})
         }
     ).catch(error =>{

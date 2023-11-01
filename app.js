@@ -21,6 +21,8 @@ const oneDay = 1000 * 60 * 60 * 24
 sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
+global.isConnected = false;
+
 
 app.use("/public/data/uploads",express.static(path.join(__dirname,"/public/data/uploads")))
 app.use(cookiesParser())
@@ -97,6 +99,8 @@ require("./src/routes/supprimer_formation")(app)                        //  http
 
 require("./src/routes/liste_image_complet")(app)                // http://localhost:3000/api/liste/imagecomplet
 require("./src/routes/idadminstrateur")(app)                    // http://localhost:3000/api/administrateur
+
+require("./src/routes/verification_connexion")(app)             // http://localhost:3000/api/verifier
             
 //require('./src/routes/envoismaildiffusion')(app)
 

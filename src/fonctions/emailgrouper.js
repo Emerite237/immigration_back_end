@@ -1,5 +1,39 @@
 
 const nodemailer=require('nodemailer');
+
+module.exports.send = async function(mail,pseudo,suject,message) {
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.email',
+ service:"gmail",
+ secure:false,
+  auth: {
+    user: 'franckemerites45@gmail.com',
+    pass: 'ufwf pqhm jahh bcud'
+  }
+});
+const mailOptions = {
+from: 'franckemerites45@gmail.com',
+to: mail,
+subject: suject,
+text:  ` Salut  ${pseudo}!\n\n\n` + message 
+};
+
+try {
+        await  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      console.log("mail envoye:" + pseudo + "       " + info.response);
+    }
+  })
+} catch (error) {
+console.error('Une erreur s\'est produite lors de l\'envoi du message :', error);
+}
+}
+
+
+/*
 module.exports.send = async function(mail,pseudo,suject,message) {
 
 
@@ -22,18 +56,18 @@ const mailOptions = {
   text:  ` Salut  ${pseudo}!\n\n\n` + message 
 };
 
-         transporter.sendMail(mailOptions,function (error,info){
-          if(error){
-          console.log(error);
-          }
-          else{
-            console.log("mail envoye"+ info.response);
-          }})
+try {
+  await  transporter.sendMail(mailOptions,function (error,info){
+    if(error){
+    console.log(error);
+    }
+    else{
+      console.log("mail envoye:" +pseudo +"       " + info.response);
+    }})
+} catch (error) {
+  console.error('Une erreur s\'est produite lors de l\'envoi du message :', error);
+}
+};
+*/
 
 
-  /*
-   
-    /*
-
- */
-} 

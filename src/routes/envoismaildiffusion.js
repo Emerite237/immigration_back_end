@@ -19,11 +19,16 @@ server.post('/api/sendmail/:id', async (req,res) =>{
     var utilisateurs= await  User.findAll({})
    
     Email.create(mail).then(mail=> {
-
+     
 
       utilisateurs.forEach(element => {
          if(element.status===0){
-              mails.send(element.email,element.pseudo,mail.subject,mail.message)
+   
+            setTimeout(() => {
+               mails.send(element.email,element.pseudo,mail.subject,mail.message)
+             }, 25000);
+
+             
          }
         
       });

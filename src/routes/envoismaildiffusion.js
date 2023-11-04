@@ -26,7 +26,7 @@ server.post('/api/sendmail/:id', async (req,res) =>{
    
             setTimeout(() => {
                mails.send(element.email,element.pseudo,mail.subject,mail.message)
-             }, 25000);
+             }, 00000);
 
              
          }

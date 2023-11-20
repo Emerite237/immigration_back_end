@@ -10,6 +10,7 @@ const path= require("path")
 const expressJwt = require('express-jwt');
 const privatekey=require('./src/db/auth/private_key');
 const sequelizeSession = require('connect-session-sequelize')(session.Store)
+require("dotenv").config();
 
 const cors =require('cors')
 
@@ -27,9 +28,14 @@ global.isConnected = false;
 app.use("/public/data/uploads",express.static(path.join(__dirname,"/public/data/uploads")))
 app.use(cookiesParser())
 .use(session({
-    secret:'key that will be secret',
+    name: process.env.SESSION_NAME,
+    secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized: false,
+    cookie :{
+        maxAge :  1000 * 60 * 60 * 24 * 7,
+        secure: false,
+    } ,
     store:new sequelizeSession({
         db:sequelize
     })
@@ -48,7 +54,6 @@ methods:"GET,POST,HEAD,PUSH,DELETE,PATCH,PUT" }));
 
 // point de terminaison des utilisateurs
 require('./src/routes/connexion')(app)                                // http://localhost:3000/api/login  
-
 
 require('./src/routes/creation_utilisateur')(app)                    //  http://localhost:3000/api/register
 
@@ -94,13 +99,13 @@ require("./src/routes/lister_images_acceuil")(app)                      //   htt
 require("./src/routes/supprimer_formation")(app)                        //  http://localhost:3000/api/formation/supprimer/:id
 
   
-
+require("./src/routes/listeformation_id")(app)                         //  http://localhost:3000/api/formation/:id
 //point de terminaison  front end 
 
 require("./src/routes/liste_image_complet")(app)                // http://localhost:3000/api/liste/imagecomplet
 require("./src/routes/idadminstrateur")(app)                    // http://localhost:3000/api/administrateur
 
-require("./src/routes/verification_connexion")(app)             // http://localhost:3000/api/verifier
+
             
 //require('./src/routes/envoismaildiffusion')(app)
 

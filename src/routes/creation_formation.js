@@ -2,6 +2,8 @@
 const {Formation}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
+const requireAuth= require("../auth/isAuthadmin")
+
 
 const path= require("path")
 const multer =require("multer");
@@ -21,7 +23,8 @@ const  MIME_TYPES={
   "image/jpeg":"jpg",
   "image/gif":"gif",
   "image/png": "png",
-  "image/bmp":"bmp"
+  "image/bmp":"bmp",
+  "video/mp4" : "mp4"
 }
 
 
@@ -53,13 +56,13 @@ const formation = require('../models/Formations')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/formation',upload.any('file'),cors(),(req,res)=>{
+   server.post('/api/creation/formation',requireAuth,upload.any('file'),cors(),(req,res)=>{
    
     formation.titre=req.body.titre;
    
     formation.contenu=req.body.contenu
     formation.description=req.body.description;
-    
+    console.log( "mes fichiers : ",req.files)
    Formation.create(formation)
     .then(formations =>{
         const message ='le formations a bien ete ajouter.'

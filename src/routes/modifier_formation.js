@@ -2,11 +2,13 @@ const { Formation }= require('../db/sequelize')
 const {Image}= require('../db/sequelize')
 const{Video}=require('../db/sequelize')
 const cors=require("cors")
+const compare=require("lodash")
 const enregistrer_image_video= require("../fonctions/modifier_image_video")
 const suppression=require("../fonctions/supprimer_image")
 const path= require("path")
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
+const requireAuth= require("../auth/isAuthadmin")
 
 var formation =require("../models/Formations")
 
@@ -15,6 +17,7 @@ const multer =require("multer");
 var images = require("../fonctions/modifier_image_video")
 
 var tab=[]
+var tab1=[]
 
 const uploadDir = path.join(__dirname, './public/data');
 //const imagePath = path.join(uploadDir, 'uploads', `${filename}.jpg`);
@@ -32,7 +35,7 @@ const  MIME_TYPES={
 const storage =multer.diskStorage({
  destination : (req,file,cb)=>
  {
-    cb(null,"./public/data/uploads/images")
+    cb(null,"../../France-Etude/src/assets")
  },
  filename : (req,file,cb)=>{
    const name=file.originalname.split(" ").join("_")
@@ -52,11 +55,14 @@ const upload= multer({storage:storage,
  )
 
 module.exports =(app) =>{
-    app.put('/api/formation/modifier/:id', upload.any('file') , cors(),(req,res) =>
+    app.put('/api/formation/modifier/:id',requireAuth,upload.any('file') , cors(),(req,res) =>
     {
         const id= req.params.id
+        tab1= req.files
 
-        if(req.files!=="undefined"){
+        console.log(req.files)
+        if( compare.isEqual(tab1,tab)===false){
+            console.log('yo image doit  etre supprimer')
 
             Image.findOne( {where: {
                 id_formation: req.params.id}}) .then(image=> {
@@ -65,13 +71,17 @@ module.exports =(app) =>{
                         return res.status(404).json({message}) 
                     }
                     console.log(  "caracteristique du: "+image)
-                    suppression.supprimer(image.path)
+                   suppression.supprimer(image.path)
                     enregistrer_image_video.modifier(req.files,id,null)
                    })
 
                     
 
               
+}
+else 
+{
+    console.log('yo image doit pas etre supprimer')
 }
 
 

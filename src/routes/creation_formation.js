@@ -3,8 +3,6 @@ const {Formation}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const requireAuth= require("../auth/isAuthadmin")
-
-
 const path= require("path")
 const multer =require("multer");
 
@@ -56,7 +54,7 @@ const formation = require('../models/Formations')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/formation',requireAuth,upload.any('file'),cors(),(req,res)=>{
+   server.post('/api/creation/formation',/*requireAuth,*/upload.any('file'),cors(),(req,res)=>{
    
     formation.titre=req.body.titre;
    

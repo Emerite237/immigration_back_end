@@ -68,6 +68,11 @@ require('./src/routes/envoismaildiffusion')(app)                // http://localh
 
 
 
+require('./src/routes/supprimer_videos_upload')(app)                // http://localhost:3000/api/video/supprimer/:id  ici il faut donner l'identifiant de la video 
+
+
+require('./src/routes/supprimer_pdf_uploader')(app)                // http://localhost:3000//api/pdf/supprimer/:id     ici il faut donner l'identifiant du pdf 
+
 
 //equire('./src/routes/enregistrer_video_youtube')(app)        //  http://localhost:3000/api/creation/videoyoutube/:id   pour les videos youtubes
 
@@ -77,7 +82,7 @@ require('./src/routes/enregistrer_videos')(app)                 // http://localh
 
 require("./src/routes/lister_image_id_formation")(app)         // http://localhost:3000/api/image/:id
 
-require("./src/routes/liste_formation")(app)                   // http://localhost:3000/api/liste/formatioideo/:id  id de la formation  video a uploader
+require("./src/routes/liste_formation")(app)                   // http://localhost:3000/api/liste/formation
 
 require('./src/routes/enregistrer_image')(app)                 // http://localhost:3000/api/uploads/image/:id
 

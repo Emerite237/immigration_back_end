@@ -49,7 +49,7 @@ Formation.hasMany(Video,{
 Video.belongsTo(Formation,{
   foreignKey: 'id_formation',
   as: 'video_formation',
-  onDelete: 'CASCADE',
+  
   hooks:true
 })
 
@@ -64,7 +64,7 @@ Formation.hasMany(Image,{
 Image.belongsTo(Formation,{
   foreignKey: 'id_formation',
   as: 'image_formation',
-  onDelete: 'CASCADE',
+ 
   hooks:true
 })
 
@@ -80,7 +80,7 @@ Formation.hasMany(Pdf,{
 Pdf.belongsTo(Formation,{
   foreignKey: 'titre_formation',
   as: 'pdf_formation',
-  onDelete: 'CASCADE',
+ 
   hooks:true
 })
 

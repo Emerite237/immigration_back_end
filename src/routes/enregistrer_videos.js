@@ -1,7 +1,6 @@
 
 const {Video}= require('../db/sequelize')
-const {ValidationError}= require('sequelize')
-const {UniqueConstraintError}=require('sequelize')
+
 
 const path= require("path")
 const multer =require("multer");
@@ -41,20 +40,13 @@ module.exports= (server) => {
 
   server.post('/api/uploads/video/:id',upload,cors(),async (req,res)=>{
     
-    var videos = req.files.map(file=>({path:file.path.replace(/\\/g, "/"),titre_formation:req.params.id}));
+    var videos = req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_formation:req.params.id}));
     console.log(videos)
     await Video.bulkCreate(videos).then(formations =>{
      
       res.json({videos})
   }).catch(error => {
-   if(error instanceof ValidationError ){
-      console.log(error);
-   return res.status(400).json({message: error.message,data: error})
   
-  }
-  if(error instanceof UniqueConstraintError){
-   return res.status(400).json({message: error.message})
-  }
   const message="la formations n'a pas pue etre ajouter"
 
   console.log(error);

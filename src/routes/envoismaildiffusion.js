@@ -15,15 +15,17 @@ server.post('/api/sendmail/:id', async (req,res) =>{
     mail.subject=req.body.subject;
     mail.message=req.body.message;
     mail.id_utilisateur=req.params.id;
+
+    annee=req.body.annee;
    
     var utilisateurs= await  User.findAll({})
    
     Email.create(mail).then(mail=> {
      
-
+     
       utilisateurs.forEach(element => {
-         if(element.status===0){
-   
+         if(element.status===0 && element.date_creation.getFullYear()===annee ){
+        
             setTimeout(() => {
                mails.send(element.email,element.pseudo,mail.subject,mail.message)
              }, 25000);

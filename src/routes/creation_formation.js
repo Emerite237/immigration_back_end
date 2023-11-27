@@ -54,7 +54,7 @@ const formation = require('../models/Formations')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/formation',/*requireAuth,*/upload.any('file'),cors(),(req,res)=>{
+   server.post('/api/creation/formation',requireAuth,upload.any('file'),cors(),(req,res)=>{
    
     formation.titre=req.body.titre;
    

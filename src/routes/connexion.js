@@ -25,15 +25,17 @@ module.exports= (app) => {
 
           if(user.status===1){
             req.session.utilisateuradmin= user.id_utilisateur;
+            global.isConnected=true
+            console.log(global.isConnected)
           }
 
           req.session.utilisateur= user.id_utilisateur;
 
 
 
-            global.isConnected=true
+            
 
-            console.log(global.isConnected)
+          
             return res.json({'token:':Token.generetedTokenForUser(user),user})
         }
     ).catch(error =>{
@@ -46,6 +48,13 @@ module.exports= (app) => {
 
     // Route pour la déconnexion
 app.post('/api/logout', (req, res) => {
+    req.session.destroy();
+    res.send('deconnection reussie ');
+  });
+
+
+  app.post('/api/admin/logout', (req, res) => {
+    global.isConnected=false
     req.session.destroy();
     res.send('deconnection reussie ');
   });

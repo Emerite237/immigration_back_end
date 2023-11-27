@@ -109,7 +109,7 @@ require("./src/routes/listeformation_id")(app)                         //  http:
 
 require("./src/routes/liste_image_complet")(app)                // http://localhost:3000/api/liste/imagecomplet
 require("./src/routes/idadminstrateur")(app)                    // http://localhost:3000/api/administrateur
-
+require("./src/routes/verification_connexion")(app)            //http://localhost:3000/api/verifier
 
             
 //require('./src/routes/envoismaildiffusion')(app)

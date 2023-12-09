@@ -1,7 +1,7 @@
 
 module.exports = (sequelize,DataTypes)=> {
 
-    return sequelize.define('videos',
+    return sequelize.define('videos_uploads',
     {
          
         
@@ -10,7 +10,7 @@ module.exports = (sequelize,DataTypes)=> {
             primaryKey: true,
             autoIncrement: true
         },
-        
+
         id_formation: {
             type: DataTypes.INTEGER,
             allowNull:false,
@@ -25,15 +25,7 @@ module.exports = (sequelize,DataTypes)=> {
           
             notNull:{msg: 'ce path est requise'}
         },
-    },
-     
-
-    
-    
-    
- 
-   
-   
+    }, 
 
 },
 {

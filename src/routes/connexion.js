@@ -1,16 +1,7 @@
 const {User} =require('../db/sequelize');
 const jwt =require('jsonwebtoken');
 const Token=require('../db/auth/auth');
-const session = require('express-session')
 
-
-const requireAuth = (req, res, next) => {
-    if (req.session.utilisateur) {
-      next();
-    } else {
-      res.status(401).send('Unauthorized');
-    }
-  }
 
 module.exports= (app) => {
 
@@ -29,14 +20,14 @@ module.exports= (app) => {
             console.log(global.isConnected)
           }
 
-          req.session.utilisateur= user.id_utilisateur;
+          req.session.utilisateur= user;
 
 
 
             
 
           
-            return res.json({'token:':Token.generetedTokenForUser(user),user})
+            return res.json({user})
         }
     ).catch(error =>{
         const message =" l' utilisateur n'a pas pue se connecte , reesayer dans quelque instants..."

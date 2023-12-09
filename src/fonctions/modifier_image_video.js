@@ -28,7 +28,7 @@ if(file!==null){
     )
   }
 }
-  if (url !== null
+  if ((url !== null) ||(url !=="undefined")
   ) {
     video.path = url
     video.id_formation = id

@@ -1,6 +1,6 @@
 const {Formation}= require('../db/sequelize');
 const {Image}= require('../db/sequelize');
-const {Video}= require('../db/sequelize');
+const {Videos_upload}= require('../db/sequelize');
 const requireAuth= require("../auth/isAuthadmin")
 const cors=require("cors")
 
@@ -8,11 +8,25 @@ const supprimer= require("../fonctions/supprimer_image")
 
 
 module.exports = (app)=>{
-    app.delete('/api/formation/supprimer/:id',requireAuth, cors(), async(req,res)=>{
+    app.delete('/api/formation/supprimer/:id'/*,requireAuth*/, cors(), async(req,res)=>{
 
+        Videos_upload.findAll({
+            where: {
+                id_formation: req.params.id}
+          }) .then(videos =>{
+        
+            console.log(videos)
 
+            videos.forEach(element => {
+                supprimer.supprimer(element.path )
+            });
+          
+    
+             })
+    
+        
       
-      var i=   Image.findOne({
+           Image.findOne({
         where: {
             id_formation: req.params.id}
       }) .then(Images =>{

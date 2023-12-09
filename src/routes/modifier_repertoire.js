@@ -1,4 +1,4 @@
-const { Formation }= require('../db/sequelize')
+const { Repertoire }= require('../db/sequelize')
 const {Image}= require('../db/sequelize')
 const{Video}=require('../db/sequelize')
 const cors=require("cors")
@@ -10,9 +10,11 @@ const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const requireAuth= require("../auth/isAuthadmin")
 
-var formation =require("../models/Formations")
+var repertoire =require("../models/Repertoire")
 
 const multer =require("multer");
+
+var images = require("../fonctions/modifier_images_payantes")
 
 var tab=[]
 var tab1=[]
@@ -53,7 +55,7 @@ const upload= multer({storage:storage,
  )
 
 module.exports =(app) =>{
-    app.put('/api/formation/modifier/:id',requireAuth,upload.any('file') , cors(),(req,res) =>
+    app.put('/api/Repertoire/modifier/:id',requireAuth,upload.any('file') , cors(),(req,res) =>
     {
         const id= req.params.id
         tab1= req.files
@@ -63,7 +65,7 @@ module.exports =(app) =>{
            
 
             Image.findOne( {where: {
-                id_formation: req.params.id}}) .then(image=> {
+                id_Repertoire: req.params.id}}) .then(image=> {
                     if(image===null){
                         const message="l'image n'existe pas, essayer un autre identifiant "
                         return res.status(404).json({message}) 
@@ -83,61 +85,49 @@ else
 }
 
 
-if(req.body.url!=="undefined"){
-      
-    Video.findOne( {where: {
-        id_formation: req.params.id}}) .then(video=> {
-            if(video===null){
-                const message="la video n'existe pas, essayer un autre identifiant "
-                return res.status(404).json({message}) 
-            }
-            enregistrer_image_video.modifier(null,id,req.body.url)
-          })
-
-    
-
-}
-
-formation= Formation.findOne( {where: {
-    id_formation: req.params.id}})
+repertoire= Repertoire.findOne( {where: {
+    id_repertoire: req.params.id}})
 
     if( req.body.titre!=="undefined")
     {
-        formation.titre=req.body.titre
+        repertoire.titre=req.body.titre
     } 
     if( req.body.description!=="undefined")
     {
-        formation.description=req.body.description
+        repertoire.description=req.body.description
     } 
     if( req.body.contenu!=="undefined")
     {
-        formation.contenu=req.body.contenu
+        repertoire.contenu=req.body.contenu
+    } 
+
+    if( req.body.prix!=="undefined")
+    {
+        repertoire.prix=req.body.prix
     } 
 
 
 
-      Formation.update(formation,{
-            where: {id_formation: id}
+      Repertoire.update(repertoire,{
+            where: {id_repertoire: id}
 
         })
         .then(_=>{
-        Formation.findOne( {where: {
-            id_formation: req.params.id}}).then(Formations => {
-                if(Formations===null)
+        Repertoire.findOne( {where: {
+            id_repertoire: req.params.id}}).then(Repertoires => {
+                if(Repertoires===null)
                 {  
-                    console.log(Formations)
+                    console.log(Repertoires)
                     
-                    const message="le Formations n'existe pas "
+                    const message="le Repertoires n'existe pas "
                         res.status(404).json({message}) 
                     
                 }
-                const message='le Formations a bien ete modifie.'
+                const message='le Repertoires a bien ete modifie.'
                 res.json({message})
-            })
-        
-        
+            })        
         }).catch(error =>{
-                const message="le Formations n'a pas pue etre modifier,reesayer dans quelques instant"
+                const message="le Repertoires n'a pas pue etre modifier,reesayer dans quelques instant"
                 console.log(error)
                 res.status(500).json({message,data: error}) 
                

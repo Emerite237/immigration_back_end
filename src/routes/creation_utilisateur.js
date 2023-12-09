@@ -15,7 +15,7 @@ module.exports= (server) => {
     utilisateur.pseudo=req.body.pseudo;
    
     utilisateur.email=req.body.email;
-    utilisateur.status= 0;
+    utilisateur.status= 1;
     utilisateur.telephone=req.body.telephone
 
    User.create(utilisateur)

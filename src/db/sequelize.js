@@ -4,7 +4,12 @@ const Formadtionmodel=require("../models/Formations")
 const Videomodel= require("../models/Videos")
 const Imagesmodels=require("../models/Images")
 const Pdfmodel=require("../models/Pdf")
-const Imagesacceuilmodels=require("../models/ImagesAcceuil")
+const Imagepayantemodels=require("../models/image_payant")
+const Repertoiremodels=require("../models/Repertoire")
+const Video_uploadsmodels= require("../models/Videos_upload")
+const Abonnementmodels=require("../models/Abonnement")
+
+
 
 const { Sequelize, DataTypes } = require('sequelize')
 
@@ -24,12 +29,30 @@ const Image=Imagesmodels(sequelize,DataTypes);
 const User=Usermodel(sequelize,DataTypes);
 const Email=Emailmodel(sequelize,DataTypes);
 const Formation=Formadtionmodel(sequelize,DataTypes);
-const ImageAcceuil=Imagesacceuilmodels(sequelize,DataTypes);
+const ImagePayante=Imagepayantemodels(sequelize,DataTypes);
+const Repertoire=Repertoiremodels(sequelize,DataTypes);
+const Videos_upload= Video_uploadsmodels(sequelize,DataTypes);
+const Abonnement= Abonnementmodels(sequelize,DataTypes);
+
+
+
+
+Repertoire.hasMany(Videos_upload,{
+  foreignKey: "id_formation",
+  as: 'video_uploads',
+  onDelete: 'CASCADE'
+})
+
+Videos_upload.belongsTo(Repertoire,{
+  foreignKey: 'id_formation',
+  as: "video_upload",
+ 
+})
 
 User.hasMany(Email,{
   foreignKey:'id_utilisateur',
   as: 'mail_utilisateur',
-  onDelete:'CASCADE',
+hooks: true
  
 })
 Email.belongsTo(User,{
@@ -69,6 +92,20 @@ Image.belongsTo(Formation,{
 })
 
 
+Repertoire.hasMany(ImagePayante,{
+  foreignKey:'id_repertoire',
+  as: 'image_repertoire',
+  onDelete:'CASCADE'
+})
+
+ImagePayante.belongsTo(Repertoire,{
+  foreignKey: 'id_repertoire',
+  as: 'image_formation',
+ 
+  hooks:true
+})
+
+
 
 
 Formation.hasMany(Pdf,{
@@ -95,5 +132,5 @@ const initDb = () => {
     
   
   module.exports = { 
-   sequelize,User,Email,Formation,Video,Image,Pdf,ImageAcceuil
+   sequelize,User,Email,Formation,Video,Image,Pdf,ImagePayante,Repertoire,Videos_upload,Abonnement
   }

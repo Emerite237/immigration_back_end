@@ -1,31 +1,38 @@
 
 module.exports = (sequelize,DataTypes)=> {
 
-    return sequelize.define('videos',
+    return sequelize.define('image_payante',
     {
          
         
-        id_videos:{
+        id_images:{
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        
-        id_formation: {
+
+        id_repertoire:{
             type: DataTypes.INTEGER,
             allowNull:false,
            
         },
+        nom: {
+            type: DataTypes.STRING,
+            allowNull:false,
+            validate: {
+                notEmpty: {msg: 'Le nom ne doit pas être vide'},
+                notNull: {msg: 'Le nom  est une propriété requise'}
+              }
+        },
        
     path:{
         type: DataTypes.TEXT,
-        allowNull: false,
        
-        validate:{
-          
-            notNull:{msg: 'ce path est requise'}
+        unique:{
+           msg: 'ce texte est deja pris' 
         },
-    },
+    
+    }, 
      
 
     

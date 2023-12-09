@@ -1,5 +1,5 @@
 
-const {Formation}= require('../db/sequelize')
+const {Repertoire}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const requireAuth= require("../auth/isAuthadmin")
@@ -8,7 +8,7 @@ const multer =require("multer");
 
 const cors= require("cors")
 
- var images = require("../fonctions/enregistrer_images")
+ var images = require("../fonctions/enregistrer_image_payante")
 
  var tab=[]
 
@@ -50,26 +50,27 @@ const storage =multer.diskStorage({
 
 
 
-const formation = require('../models/Formations')
+const repertoire = require('../models/Repertoire')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/formation'/*,requireAuth*/,upload.any('file'),cors(),(req,res)=>{
+   server.post('/api/creation/repertoire'/*,requireAuth*/,upload.any('file'),cors(),(req,res)=>{
    
-    formation.titre=req.body.titre;
+    repertoire.titre=req.body.titre;
    
-    formation.contenu=req.body.contenu
-    formation.description=req.body.description;
+    repertoire.contenu=req.body.contenu
+    repertoire.description=req.body.description;
+    repertoire.prix=req.body.prix;
    
-    console.log( "mes fichiers : ",req.files)
-   Formation.create(formation)
-    .then(formations =>{
-        const message ='le formations a bien ete ajouter.'
+    
+   Repertoire.create(repertoire)
+    .then(repertoires =>{
+        const message ='le Repertoires a bien ete ajouter.'
 
        
-          images.image(req.files,formations.id_formation,req.body.url)
+          images.image(req.files,repertoires.id_repertoire,req.body.url)
 
-        res.json({message,data: formations})
+        res.json({message,data:repertoires})
 
 
     }).catch(error => {
@@ -81,7 +82,7 @@ module.exports= (server) => {
     if(error instanceof UniqueConstraintError){
      return res.status(400).json({message: error.message})
     }
-    const message="la formations n'a pas pue etre ajouter"
+    const message="la Repertoires n'a pas pue etre ajouter"
 
     console.log(error);
     res.status(500).json({message, data:error})

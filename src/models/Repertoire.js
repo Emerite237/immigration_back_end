@@ -1,8 +1,8 @@
 
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('formation', {
-      id_formation: {
+    return sequelize.define('repertoire', {
+      id_repertoire: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -34,9 +34,19 @@ module.exports = (sequelize, DataTypes) => {
           notNull: {msg: `Votre contenu est obligatoire merci de le renseigner`}
         }
       },
-     
-    
-     
+
+      
+      prix:{
+        type: DataTypes.DOUBLE,
+        allowNull:false,
+        validate: {
+            isFloat: {msg:'le prix  est un reel'},
+            notNull:{msg:'cette propriete est requise '},
+          
+        }
+
+    },
+         
     }, {
       timestamps: true,
       createdAt: 'date_creation',

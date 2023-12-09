@@ -1,15 +1,15 @@
-const {Formation}= require('../db/sequelize')
+const {Repertoire}= require('../db/sequelize')
 const cors= require('cors')
 const requireAuth= require("../auth/isAuth")
 
 module.exports= (server) => {
-   server.get('/api/liste/formation/'/*,requireAuth*/,cors(),async(req,res)=>{
+   server.get('/api/liste/repertoire',requireAuth,cors(),async(req,res)=>{
    
 try {
 
-   var Formations= await  Formation.findAll({})
+   var Repertoires= await  Repertoire.findAll()
       
-      res.json(Formations) }
+      res.json(Repertoires) }
       
        catch (error ){
         

@@ -2,19 +2,20 @@ const {Formation}= require('../db/sequelize')
 const cors= require('cors')
 const requireAuth= require("../auth/isAuth")
 
-
+var tabs=[]
 module.exports= (server) => {
-   server.get('/api/formation/:id',requireAuth,cors(),async(req,res)=>{
+   server.get('/api/liste/titre_formation',requireAuth,cors(),async(req,res)=>{
 
     
 
-    Formation.findOne({
-       where: {
-      id_formation: req.params.id}
-   })
-       .then(Formation => {
+    Formation.findAll({})
+       .then(formation => {
         
-         res.json(Formation )
+         formation.forEach(element => {
+            tabs.push(formation.titre)
+         });
+
+         res.json(tabs)
        })
        .catch(error => {
          const message = `La formation  n'a pas pu être récupérée. Réessayez dans quelques instants.`

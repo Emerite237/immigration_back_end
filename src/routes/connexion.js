@@ -14,12 +14,9 @@ module.exports= (app) => {
             return res.status(404).json({message})
           }
 
-          if(user.status===1){
-            req.session.utilisateuradmin= user.id_utilisateur;
+         
             global.isConnected=true
-            console.log(global.isConnected)
-          }
-
+         
           req.session.utilisateur= user;
 
 
@@ -38,15 +35,23 @@ module.exports= (app) => {
     } )
 
     // Route pour la déconnexion
-app.post('/api/logout', (req, res) => {
-    req.session.destroy();
-    res.send('deconnection reussie ');
+app.get('/api/logout', (req, res) => {
+
+  var  objet = {
+    message:'deconnexion reussie'
+   }
+       req.session.destroy();
+    
+    res.json({objet});
   });
 
 
-  app.post('/api/admin/logout', (req, res) => {
-    global.isConnected=false
+  app.get('/api/admin/logout', (req, res) => {
+   var  objet = {
+    message:'deconnexion reussie'
+   }
     req.session.destroy();
-    res.send('deconnection reussie ');
+   
+    res.json({objet});
   });
 }

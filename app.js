@@ -72,6 +72,11 @@ require("./src/routes/liste_des_repertoires")(app)                     //http://
 // point de terminaison des utilisateurs
 require('./src/routes/connexion')(app)                                // http://localhost:3000/api/login  
 
+                                                                         // http://localhost:3000/api/admin/logout  
+
+                                                                        // http://localhost:3000/api/logout
+
+
 require('./src/routes/creation_utilisateur')(app)                    //  http://localhost:3000/api/register
 
 require("./src/routes/modifier_speudo")(app)                         // http://localhost:3000/api/utilisateur/modifier/speudo

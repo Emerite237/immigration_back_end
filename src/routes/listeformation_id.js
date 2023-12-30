@@ -1,10 +1,9 @@
 const {Formation}= require('../db/sequelize')
 const cors= require('cors')
-const requireAuth= require("../auth/isAuth")
 
 
 module.exports= (server) => {
-   server.get('/api/formation/:id',requireAuth,cors(),async(req,res)=>{
+   server.get('/api/formation/:id',cors(),async(req,res)=>{
 
     
 

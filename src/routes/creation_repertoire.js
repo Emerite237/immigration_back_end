@@ -2,7 +2,6 @@
 const {Repertoire}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-const requireAuth= require("../auth/isAuthadmin")
 const path= require("path")
 const multer =require("multer");
 
@@ -54,7 +53,7 @@ const repertoire = require('../models/Repertoire')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/repertoire'/*,requireAuth*/,upload.any('file'),cors(),(req,res)=>{
+   server.post('/api/creation/repertoire',upload.any('file'),cors(),(req,res)=>{
    
     repertoire.titre=req.body.titre;
    

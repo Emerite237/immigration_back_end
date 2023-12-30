@@ -1,14 +1,13 @@
 const {Repertoire}= require('../db/sequelize');
 const {ImagePayante}= require('../db/sequelize');
 const {Videos_upload}= require('../db/sequelize');
-const requireAuth= require("../auth/isAuthadmin")
 const cors=require("cors")
 
 const supprimer= require("../fonctions/supprimer_image")
 
  var tab=[]
 module.exports = (app)=>{
-    app.delete('/api/repertoire/supprimer/:id',requireAuth, cors(), async(req,res)=>{
+    app.delete('/api/repertoire/supprimer/:id', cors(), async(req,res)=>{
 
 
       

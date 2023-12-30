@@ -1,13 +1,12 @@
 
 const {Pdf}= require('../db/sequelize');
-const requireAuth= require("../auth/isAuthadmin")
 const cors=require("cors")
 
 const supprimer= require("../fonctions/supprimer_image")
 
 
 module.exports = (app)=>{
-    app.delete('/api/pdf/supprimer/:id',requireAuth, cors(), async(req,res)=>{
+    app.delete('/api/pdf/supprimer/:id', cors(), async(req,res)=>{
 
 
        Pdf.findOne({ where: {

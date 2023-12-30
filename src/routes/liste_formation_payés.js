@@ -2,12 +2,11 @@ const {Repertoire}= require('../db/sequelize')
 const {Abonnement}= require('../db/sequelize')
 const cors= require('cors')
 var liste=require("../fonctions/liste_formation_paye")
-const requireAuth= require("../auth/isAuth")
 var tabs=[]
 var tab=[]
 var rep=[]
 module.exports= (server) => {
-   server.get('/api/liste/formation_paye',requireAuth,cors(),async(req,res)=>{
+   server.get('/api/liste/formation_paye',cors(),async(req,res)=>{
    
 try {
 

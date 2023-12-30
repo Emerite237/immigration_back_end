@@ -8,7 +8,6 @@ const suppression=require("../fonctions/supprimer_image")
 const path= require("path")
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-const requireAuth= require("../auth/isAuthadmin")
 
 var formation =require("../models/Formations")
 
@@ -53,7 +52,7 @@ const upload= multer({storage:storage,
  )
 
 module.exports =(app) =>{
-    app.put('/api/formation/modifier/:id',requireAuth,upload.any('file') , cors(),(req,res) =>
+    app.put('/api/formation/modifier/:id',upload.any('file') , cors(),(req,res) =>
     {
         const id= req.params.id
         tab1= req.files

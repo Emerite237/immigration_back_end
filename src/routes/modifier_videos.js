@@ -1,10 +1,9 @@
 const { Video }= require('../db/sequelize')
 const {ValidationError}=require('sequelize')
 const cors=require("cors")
-const requireAuth= require("../auth/isAuthadmin")
 
 module.exports =(app) =>{
-    app.put('/api/video/modifier/:id', requireAuth, cors(),(req,res) =>
+    app.put('/api/video/modifier/:id', cors(),(req,res) =>
     {
         const id= parseInt(req.params.id)
 

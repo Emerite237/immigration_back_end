@@ -14,17 +14,17 @@ module.exports= (app) => {
             return res.status(404).json({message})
           }
 
+        
          
             global.isConnected=true
          
           req.session.utilisateur= user;
 
-
-
-            
-
+          var  objet = {
+            message:req.sessionID
+           }
           
-            return res.json({user})
+            return res.json(user)
         }
     ).catch(error =>{
         const message =" l' utilisateur n'a pas pue se connecte , reesayer dans quelque instants..."
@@ -35,15 +35,19 @@ module.exports= (app) => {
     } )
 
     // Route pour la déconnexion
-app.get('/api/logout', (req, res) => {
+app.get('/api/logout/:identifiant', (req, res) => {
 
   var  objet = {
     message:'deconnexion reussie'
    }
-       req.session.destroy();
-    
+   
+   req.sessionStore.destroy(req.params.identifiant, (err) => {
+    if (err) {
+      console.error(err);
+    }
     res.json({objet});
-  });
+  })
+});
 
 
   app.get('/api/admin/logout', (req, res) => {

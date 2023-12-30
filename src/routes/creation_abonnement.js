@@ -3,7 +3,7 @@ const {Abonnement}= require('../db/sequelize')
 const {User}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-const requireAuth= require("../auth/isAuthadmin")
+
 
 
 const cors= require("cors")
@@ -14,7 +14,7 @@ const abonnement = require('../models/Abonnement')
 
 
 module.exports= (server) => {
-   server.post('/api/creation/abonnement'/*,requireAuth*/,cors(),(req,res)=>{
+   server.post('/api/creation/abonnement',cors(),(req,res)=>{
    
     abonnement.titre_repertoire=req.body.titre_repertoire;
     abonnement.adresse_visiteur=req.body.adresse_visiteur;

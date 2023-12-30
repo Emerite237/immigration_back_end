@@ -1,10 +1,9 @@
 const {User}= require('../db/sequelize')
 const cors= require('cors')
-const requireAuth= require("../auth/isAuth")
 
 var tabs=[]
 module.exports= (server) => {
-   server.get('/api/liste/adresse_mail',requireAuth,cors(),async(req,res)=>{
+   server.get('/api/liste/adresse_mail',cors(),async(req,res)=>{
 
     
 

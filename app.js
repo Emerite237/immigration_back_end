@@ -54,8 +54,8 @@ methods:"GET,POST,HEAD,PUSH,DELETE,PATCH,PUT" }));
 
 //point de terminaison des repertoires
 require('./src/routes/creation_repertoire')(app);                     //http://localhost:3000/api/creation/abonnement
-
-
+require('./src/routes/lister_images_id_repertoire')(app);                     //http://localhost:3000/api/imagepayante/id pour avoir les images associer a un repertoire 
+ 
 require("./src/routes/liste_des_repertoires")(app)                     //http://localhost:3000/api/liste/repertoire
 
 
